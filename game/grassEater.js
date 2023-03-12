@@ -1,7 +1,6 @@
-class GrassEater {
+class GrassEater extends LivingCreature{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+       super (x,y)
         this.energy = 10;
         this.directions = [];
     }
@@ -17,30 +16,12 @@ class GrassEater {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(char) {
-        this.getNewCoordinates();
-        let found = [];
-
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-
-            if (y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0) {
-                if (matrix[y][x] == char) {
-                    found.push(this.directions[i]);
-                }
-            }
-
-            
-        }
-
-        return found;
-    }
+    
     //բազմանալ
     mul() {
         let emptyCell = this.chooseCell(0);
         let newCell = random(emptyCell)
-   console.log(newCell);
+        console.log(newCell);
         if (newCell && this.energy > 5) {
             let newX = newCell[0];
             let newY = newCell[1];
@@ -54,7 +35,7 @@ class GrassEater {
     }
 
 
-//ուտել
+    //ուտել
     eat() {
         let emptyCell = this.chooseCell(1);
         let newCell = random(emptyCell)
@@ -80,10 +61,10 @@ class GrassEater {
             if (this.energy > 30) {
                 this.mul()
             }
-        } 
-        
-        
-        
+        }
+
+
+
         else {
             this.move()
         }
@@ -101,7 +82,7 @@ class GrassEater {
             matrix[newY][newX] = 2;
             matrix[this.y][this.x] = 0;
 
-           
+
             this.x = newX;
             this.y = newY;
 
@@ -110,7 +91,7 @@ class GrassEater {
             if (this.energy < 0) {
                 this.die()
             }
-        } 
+        }
     }
 
 
